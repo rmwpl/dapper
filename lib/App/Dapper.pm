@@ -537,6 +537,8 @@ sub walk {
   my $output_handle = new IO::Dir "$output_dir";;
   my $directory_element;
 
+  my %files;
+
   # if the directory does not exist, create it
   if (!(defined $output_handle)) {
     mkdir($output_dir);
@@ -566,10 +568,15 @@ sub walk {
         my $source = "$source_dir/$directory_element";
         my $output = "$output_dir/$directory_element";
       
-        $self->build_inventory($source, $output);
+        $files{$source}=$output;
       }
     }
     undef $source_handle;
+    foreach my $file (reverse sort keys %files) {
+      my $source = $file;
+      my $output = $files{$file};
+      $self->build_inventory($source, $output);
+    }
   }
   else {
     die "error: could not get a handle on $source_dir/$directory_element";
