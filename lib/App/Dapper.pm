@@ -643,13 +643,14 @@ sub build_inventory {
     $page{id} = ++$ID; #$page{url};
 
     if (not defined $page{extension}) { $page{extension} = $self->{site}->{extension}; }
+    $page{url} .= $page{extension};
 
     $page{source_file_extension} = App::Dapper::Utils::filter_extension($source_file_name);
 
     $page{filename} = App::Dapper::Utils::filter_stem("$destination_file_name") . $page{extension};
     
     if(defined $page{categories}) {
-        my $filename = $self->{site}->{output} . $page{url};
+        my $filename = $self->{site}->{output} . $page{url} . $page{extension};
         $filename =~ s/\/$/\/index.html/; 
         $page{filename} = canonpath $filename;
     }
