@@ -650,8 +650,8 @@ sub build_inventory {
     $page{filename} = App::Dapper::Utils::filter_stem("$destination_file_name") . $page{extension};
     
     if(defined $page{categories}) {
-        my $filename = $self->{site}->{output} . $page{url} . $page{extension};
-        $filename =~ s/\/$/\/index.html/; 
+        my $filename = $self->{site}->{output} . $page{url};
+        $filename =~ s/\/\.html$/\/index.html/; 
         $page{filename} = canonpath $filename;
     }
 
