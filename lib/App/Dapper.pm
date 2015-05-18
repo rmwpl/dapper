@@ -510,7 +510,7 @@ sub read_templates {
         my $frontmatter;
         my $content;
 
-        $value =~ /(---.*?)---(.*)/s;
+        $value =~ /(^---.*?)^---(.*)/s;
 
         if (not defined $1) { next; }
         if (not defined $2) { next; }
