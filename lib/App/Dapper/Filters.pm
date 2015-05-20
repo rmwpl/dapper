@@ -67,7 +67,6 @@ sub date_to_xmlschema {
     use DateTime;
     use DateTime::Format::XSD;
     use DateTime::Format::DateParse;
-    print "str|$str|\n";
     my $dt = DateTime::Format::DateParse->parse_datetime($str) || die;
 
     return DateTime::Format::XSD->format_datetime($dt);
