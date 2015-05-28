@@ -388,6 +388,7 @@ sub render {
 
     my $tt = Template::Alloy->new({
         INCLUDE_PATH => $self->{layout},
+        RELATIVE => 1,
         ANYCASE => 1,
         ENCODING => 'utf8',
         #STRICT => 1,
@@ -666,7 +667,8 @@ sub build_inventory {
     $page{dirname} = $dirname;
 
     if ($page{source_file_extension} eq ".md") { 
-        $page{content} = markdown($page{content});
+        my $mmd = Text::MultiMarkdown->new( break_at_newlines => 1 );
+        $page{content} = $mmd->markdown($page{content});
 
         # Save first paragraph of content as excerpt
         $page{content} =~ /(<p>.*?<\/p>)/s;
